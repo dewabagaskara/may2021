@@ -58,5 +58,22 @@ public class APITests extends BaseAPITest {
 		assertEquals(cardCount, 231);
 
 	}
+	
+	@Test(priority = 4)
+	public void registerAPI() {
+		LinkedTreeMap<String, Object> registerMap = TestUtils
+				.convertJsonToMap(DataUtils.getDataFromExcel("Payload", "registerAPI")
+						.replace("uniqueEmail", faker.name().username() + "@gmail.com")
+						.replace("uniquePhone", "+62-81584210857"));
+
+		Response response = given().spec(commonSpec).body(registerMap).when().post(APIEndpoints.registerAPI);
+
+		verifyAPIStatusTimeAndHeader(response, 200);
+	}
+
+	@Test(priority = 5)
+	public void logotAPI() {
+
+	}
 
 }
